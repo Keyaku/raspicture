@@ -1,4 +1,4 @@
-# RasPicture - Remote streaming from your Pi
+# RasPicture - Remote streaming for your Pi
 
 ### Core idea:
 #### If it displays via HDMI/S-Video, it can be streamed with RasPicture.
