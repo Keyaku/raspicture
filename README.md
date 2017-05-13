@@ -1,7 +1,7 @@
-# RasPicture - Remote stream a Raspberry Pi's screen
+# RasPicture - Remote streaming from your Pi
 
-## Core idea:
-##### If it displays via HDMI/S-Video, it can be streamed with RasPicture.
+### Core idea:
+#### If it displays via HDMI/S-Video, it can be streamed with RasPicture.
 
 Inspired by [TelePi](https://github.com/DougGore/telepi "DougGore's TelePi Repo"),
 RasPicture is an attempt to deliver the best remote desktop solution over software
