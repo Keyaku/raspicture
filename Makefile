@@ -2,18 +2,32 @@ SRCDIR ?= src
 OBJDIR = bld
 DEPS = $(OBJDIR)/*.d
 
-DEFINES += -DHAVE_LIBBCM_HOST -DUSE_EXTERNAL_LIBBCM_HOST -DUSE_VCHIQ_ARM -DOMX_SKIP64BIT
-INCLUDE += -I./include/ -I/opt/vc/include/        \
-	-I/opt/vc/include/interface/vcos/pthreads/    \
-	-I/opt/vc/include/interface/vmcs_host/linux/  \
-	-I/opt/vc/src/hello_pi/libs/ilclient/         \
+# Including headers
+INC_DMX = -I/opt/vc/include/                    \
+	-I/opt/vc/include/interface/vmcs_host/      \
+	-I/opt/vc/include/interface/vcos/pthreads   \
+	-I/opt/vc/include/interface/vmcs_host/linux
+INC_OMX = -I/opt/vc/include/IL
+INC_OMX_ILCLIENT = -I/opt/vc/src/hello_pi/libs/ilclient/
 
-LIBRARIES += -L/opt/vc/lib -L/opt/vc/src/hello_pi/libs/ilclient
+INCLUDE += -I./include/ $(INC_DMX) $(INC_OMX) $(INC_OMX_ILCLIENT)
 
+# Libraries to use
+LIBS_DMX = -L/opt/vc/lib/ -lbcm_host -lvcos -lvchiq_arm -lpthread
+LIBS_OMX = -lopenmaxil
+LIBS_OMX_ILCLIENT = -L/opt/vc/src/hello_pi/libs/ilclient -lilclient
+
+# Definitions
+DEFINES += -DOMX_SKIP64BIT
+
+# Compiler and Linker flags
+CFLAGS = $(INCLUDE) $(DEFINES)
+CFLAGS += -c -Wall -Wno-psabi -fdiagnostics-color=auto
+LDFLAGS = $(LIBS_DMX) $(LIBS_OMX) $(LIBS_OMX_ILCLIENT)
+
+# Compilers, Linkers, and executable filename
 CC ?= gcc
 LD = $(CC)
-CFLAGS = $(INCLUDE) $(DEFINES) -c -Wall -Wno-psabi -fdiagnostics-color=auto
-LDFLAGS = $(LIBRARIES) -lpthread -lopenmaxil -lbcm_host -lvcos -lvchiq_arm -lilclient
 
 EXECFILE ?= raspicture
 
