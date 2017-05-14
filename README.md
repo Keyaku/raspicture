@@ -9,7 +9,9 @@ like VNC or X windows by bringing a higher, smoother framerate with low latency.
 
 It achieves this by using libraries that directly communicate with the Pi's framebuffer.
 
-In a nutshell, it fires up Dispmanx to capture exactly what's onscreen and the hardware H.264 encoder compresses the video in real-time, then it streams this data to the standard output.
+In a nutshell, it fires up OpenMAX to capture exactly what's onscreen
+and the GPU-assisted H.264 encoder compresses the video in real-time,
+then it streams this data to the standard output.
 
 The stream can also be redirected to a file, meaning you may use RasPicture
 to capture videos for demos without the need for additional hardware.
