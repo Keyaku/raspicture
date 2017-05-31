@@ -5,20 +5,34 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-#include <bcm_host.h>
-
 #include "raspicture.h"
+
+enum ERRVAL {
+	ERR_INIT    = -1,
+	ERR_START   = -2,
+	ERR_DESTROY = -3
+};
 
 
 int raspicture_start(FILE *stream)
 {
+	DISPMANX_STATE_T state;
+
 	// Before any call to the GPU is made...
 	bcm_host_init();
 
 	// TODO: Initialize main data structures
 	// TODO: Implement display startup
+	if (init_dispmanx(&state) != 0) {
+		return ERR_START;
+	}
+
 	// TODO: Implement streaming
+
 	// TODO: Destroy main data structures
+	if (destroy_dispmanx(&state) != 0) {
+		return ERR_DESTROY;
+	}
 
 	return 0;
 }
