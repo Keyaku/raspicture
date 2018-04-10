@@ -35,3 +35,7 @@ bld/
 # Debug files
 *.dSYM/
 *.su
+
+# OS-specific files
+*.DS_Store
+*Thumbs.db
